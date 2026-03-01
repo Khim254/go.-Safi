@@ -3,190 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>go.safi | Premium Laundry & Deep Clean</title>
+    <title>go.safi | Premium Cleaning</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     
     <style>
+        /* Force Background to avoid "White Flash" */
+        html, body { background-color: #020617 !important; color: white; margin: 0; padding: 0; }
+        
         :root { --brand-red: #e11d48; --brand-blue: #1e40af; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: white; overflow-x: hidden; }
-        .font-luxury { font-family: 'Playfair Display', serif; }
+        
+        .logo-glow { box-shadow: 0 0 20px rgba(30, 64, 175, 0.5); border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Smooth Entrance */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* THE LOGO: POWER BADGE */
-        .logo-container {
-            background: linear-gradient(135deg, var(--brand-blue) 0%, #1e3a8a 100%);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px -5px rgba(30, 64, 175, 0.5);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Background Glow Pulse */
+        @keyframes pulse-bg {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
         }
-        .logo-container:hover { transform: scale(1.1) rotate(-5deg); background: var(--brand-red); }
-
-        /* BUTTONS: ULTRA-RESPONSIVE */
-        .btn-primary { 
-            background: var(--brand-red); 
-            transition: all 0.3s ease; 
-            box-shadow: 0 0 0 rgba(225, 29, 72, 0);
-        }
-        .btn-primary:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 25px rgba(225, 29, 72, 0.4);
-            filter: brightness(1.1);
-        }
-        .btn-secondary { 
-            border: 2px solid var(--brand-blue); 
-            transition: all 0.3s ease; 
-        }
-        .btn-secondary:hover { background: var(--brand-blue); color: white; }
-
-        /* ANIMATIONS: GLASS & GLOW */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-        }
-        .glass-card:hover { border-color: var(--brand-red); background: rgba(255, 255, 255, 0.07); }
-
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-marquee { display: flex; animation: marquee 25s linear infinite; width: max-content; }
-
-        /* MODAL FIX */
-        #booking-modal { display: none; opacity: 0; transition: opacity 0.4s ease; }
-        #booking-modal.active { display: flex; opacity: 1; }
+        .bg-glow { animation: pulse-bg 8s infinite; }
     </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden">
 
-    <div class="bg-brand-red text-white py-2.5 overflow-hidden sticky top-0 z-[150]">
-        <div class="animate-marquee font-black uppercase text-[10px] tracking-[0.4em]">
-            <span class="mx-12 text-white">⚡ Free Pickup & Delivery (24-36 Hours) ⚡</span>
-            <span class="mx-12">🏢 Corporate Deep Cleaning Specialists 🏢</span>
-            <span class="mx-12 text-white">⚡ Free Pickup & Delivery (24-36 Hours) ⚡</span>
-            <span class="mx-12">🏢 Corporate Deep Cleaning Specialists 🏢</span>
-        </div>
+    <div class="fixed inset-0 -z-10 bg-[#020617]">
+        <div class="bg-glow absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px]"></div>
+        <div class="bg-glow absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-rose-900/10 rounded-full blur-[120px]"></div>
     </div>
 
-    <nav class="flex justify-between items-center px-8 py-8 max-w-7xl mx-auto relative z-[100]">
-        <div class="flex items-center gap-5 cursor-pointer" id="logoLink">
-            <div class="logo-container h-16 w-16 rounded-[22px] flex items-center justify-center font-black italic text-2xl text-white">
-                gs
-            </div>
-            <div>
-                <h1 class="text-2xl font-black tracking-tighter uppercase leading-none text-white">go.safi</h1>
-                <p class="text-brand-red font-luxury italic text-[11px] font-bold">Laundry is luxury</p>
+    <div class="bg-[#e11d48] text-white py-2 text-center text-[10px] font-black uppercase tracking-[0.3em] sticky top-0 z-[100]">
+        ⚡ Free Pickup & Delivery (24-36 Hours) ⚡
+    </div>
+
+    <nav class="flex justify-between items-center px-6 py-8 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 cursor-pointer" onclick="window.scrollTo(0,0)">
+            <div class="logo-glow h-14 w-14 bg-[#1e40af] rounded-2xl flex items-center justify-center font-black italic text-2xl text-white">gs</div>
+            <div class="leading-none">
+                <h1 class="text-xl font-black uppercase tracking-tighter">go.safi</h1>
+                <p class="text-[#e11d48] text-[9px] font-bold italic">Laundry is luxury</p>
             </div>
         </div>
-        <button id="navBookingTrigger" class="btn-primary px-8 py-3.5 rounded-full font-black text-[10px] uppercase tracking-widest text-white shadow-xl">
-            Book Pickup
+        <button onclick="showModal()" class="bg-[#e11d48] text-white px-6 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-transform shadow-lg shadow-rose-900/20">
+            Book Now
         </button>
     </nav>
 
-    <section class="min-h-[75vh] flex flex-col items-center justify-center text-center px-6 relative">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue/20 rounded-full blur-[120px] -z-10"></div>
-        
-        <div class="reveal">
-            <h2 class="text-white font-black text-6xl md:text-[130px] leading-[0.8] tracking-tighter uppercase mb-8">
-                Clean.<br/><span class="text-brand-blue italic font-luxury lowercase">beyond</span><br/><span class="text-brand-red">Expectation.</span>
-            </h2>
-            <p class="text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-12 font-medium">
-                Nairobi's elite cleaning ecosystem. From executive silks to office blocks. Delivered in <span class="text-white font-bold underline">36 hours</span>.
-            </p>
-            <div class="flex flex-wrap justify-center gap-5">
-                <button id="heroBookingTrigger" class="btn-primary px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest text-white shadow-2xl">Start Order</button>
-                <a href="https://wa.me/254707799266" class="btn-secondary px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest text-white">WhatsApp HQ</a>
-            </div>
+    <section class="py-20 px-6 text-center max-w-5xl mx-auto">
+        <h2 class="reveal text-7xl md:text-[120px] font-black leading-[0.85] tracking-tighter uppercase mb-8">
+            Safi.<br/><span class="text-[#1e40af] italic">beyond</span><br/><span class="text-[#e11d48]">Clean.</span>
+        </h2>
+        <p class="reveal text-slate-400 text-lg md:text-xl mb-12 max-w-xl mx-auto">
+            Nairobi's elite cleaning service. We handle the dirty work while you handle the business. Delivered in <span class="text-white underline">36 hours</span>.
+        </p>
+        <div class="reveal flex flex-wrap justify-center gap-4">
+            <button onclick="showModal()" class="bg-[#1e40af] text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl">Start Pickup</button>
+            <a href="https://wa.me/254707799266" class="border border-slate-700 px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all">WhatsApp</a>
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-8 py-20">
-        <div class="grid lg:grid-cols-3 gap-8">
-            <div class="reveal-card glass-card p-12 rounded-[45px] group">
-                <div class="h-14 w-14 bg-brand-blue rounded-xl mb-8 flex items-center justify-center text-white">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20"/></svg>
-                </div>
-                <h3 class="text-3xl font-black mb-4 uppercase italic">Laundry</h3>
-                <p class="text-slate-400 mb-8 text-sm leading-relaxed">Full-cycle executive care. Premium detergents only.</p>
-                <button class="serviceTrigger text-brand-red font-black text-[10px] uppercase tracking-widest border-b-2 border-brand-red/30 hover:border-brand-red pb-1 transition-all">Select Service →</button>
-            </div>
-            <div class="reveal-card glass-card p-12 rounded-[45px] border-brand-red group bg-brand-blue/5">
-                <div class="h-14 w-14 bg-brand-red rounded-xl mb-8 flex items-center justify-center text-white">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 20H4V4h16v16zM4 9h16"/></svg>
-                </div>
-                <h3 class="text-3xl font-black mb-4 uppercase italic">Deep Clean</h3>
-                <p class="text-slate-400 mb-8 text-sm leading-relaxed">Carpets, Curtains, and Office blocks. Steam extraction specialists.</p>
-                <button class="serviceTrigger text-white font-black text-[10px] uppercase tracking-widest border-b-2 border-white/30 hover:border-white pb-1 transition-all">Select Service →</button>
-            </div>
-            <div class="reveal-card glass-card p-12 rounded-[45px] group">
-                <div class="h-14 w-14 bg-brand-blue rounded-xl mb-8 flex items-center justify-center text-white">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18h12M12 6v12"/></svg>
-                </div>
-                <h3 class="text-3xl font-black mb-4 uppercase italic">Steam Press</h3>
-                <p class="text-slate-400 mb-8 text-sm leading-relaxed">Industrial precision ironing. Perfectly hung and ready for the boardroom.</p>
-                <button class="serviceTrigger text-brand-red font-black text-[10px] uppercase tracking-widest border-b-2 border-brand-red/30 hover:border-brand-red pb-1 transition-all">Select Service →</button>
-            </div>
+    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8">
+        <div class="reveal bg-white/5 border border-white/10 p-10 rounded-[40px] hover:border-[#e11d48] transition-all">
+            <div class="h-12 w-12 bg-[#1e40af] rounded-xl mb-6 flex items-center justify-center font-bold">1</div>
+            <h3 class="text-2xl font-black uppercase mb-4 italic text-[#e11d48]">Laundry</h3>
+            <p class="text-slate-400 text-sm mb-6">Executive wash and fold. We treat your clothes like royalty.</p>
+            <button onclick="showModal()" class="text-[10px] font-black uppercase tracking-widest border-b border-white/20 pb-1">Book →</button>
+        </div>
+        <div class="reveal bg-[#1e40af]/10 border border-[#1e40af]/30 p-10 rounded-[40px] scale-105 hover:border-[#e11d48] transition-all">
+            <div class="h-12 w-12 bg-[#e11d48] rounded-xl mb-6 flex items-center justify-center font-bold text-white">2</div>
+            <h3 class="text-2xl font-black uppercase mb-4 italic">Deep Clean</h3>
+            <p class="text-slate-400 text-sm mb-6">Carpet, Curtains, and Office blocks. Steam extraction specialists.</p>
+            <button onclick="showModal()" class="text-[10px] font-black uppercase tracking-widest border-b border-white/20 pb-1">Book →</button>
+        </div>
+        <div class="reveal bg-white/5 border border-white/10 p-10 rounded-[40px] hover:border-[#e11d48] transition-all">
+            <div class="h-12 w-12 bg-[#1e40af] rounded-xl mb-6 flex items-center justify-center font-bold">3</div>
+            <h3 class="text-2xl font-black uppercase mb-4 italic text-[#e11d48]">Steam Press</h3>
+            <p class="text-slate-400 text-sm mb-6">Industrial-grade ironing for that crisp executive finish.</p>
+            <button onclick="showModal()" class="text-[10px] font-black uppercase tracking-widest border-b border-white/20 pb-1">Book →</button>
         </div>
     </section>
 
-    <div id="booking-modal" class="fixed inset-0 z-[1000] bg-brand-blue/95 backdrop-blur-2xl flex items-center justify-center p-6">
-        <div class="bg-white text-brand-blue w-full max-w-lg rounded-[50px] p-12 shadow-2xl relative">
-            <button id="closeModal" class="absolute top-10 right-10 text-slate-300 hover:text-brand-red transition-colors">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <h2 class="text-5xl font-black mb-2 uppercase italic tracking-tighter">Secure.</h2>
-            <p class="text-slate-400 mb-10 text-[10px] font-black uppercase tracking-widest">Free Pickup • Nairobi Wide</p>
-            <form id="waForm" class="space-y-5">
-                <input type="text" id="custName" placeholder="Full Name" class="w-full bg-slate-100 border-none rounded-2xl p-5 text-sm outline-none focus:ring-2 focus:ring-brand-red" required>
-                <select id="custService" class="w-full bg-slate-100 border-none rounded-2xl p-5 text-sm outline-none font-bold text-slate-600">
+    <div id="modal" class="fixed inset-0 z-[200] hidden bg-[#020617]/95 backdrop-blur-xl flex items-center justify-center p-6">
+        <div class="bg-white text-[#020617] w-full max-w-md rounded-[40px] p-10 relative">
+            <button onclick="hideModal()" class="absolute top-8 right-8 text-slate-300">✕</button>
+            <h2 class="text-4xl font-black mb-6 uppercase italic tracking-tighter">Request.</h2>
+            <form id="orderForm" class="space-y-4">
+                <input type="text" id="name" placeholder="Your Name" class="w-full bg-slate-100 rounded-xl p-4 outline-none focus:ring-2 focus:ring-[#e11d48]" required>
+                <select id="service" class="w-full bg-slate-100 rounded-xl p-4 outline-none font-bold">
                     <option>Standard Laundry</option>
                     <option>Deep Carpet Clean</option>
-                    <option>Curtain/Sofa Steam</option>
                     <option>Office Detail</option>
                 </select>
-                <button type="submit" class="w-full bg-brand-red text-white py-6 rounded-2xl font-black uppercase text-sm shadow-xl hover:scale-[1.02] transition-transform">Confirm Order</button>
+                <button type="submit" class="w-full bg-[#e11d48] text-white py-5 rounded-xl font-black uppercase tracking-widest shadow-xl">Send to WhatsApp</button>
             </form>
         </div>
     </div>
 
     <script>
-        // 1. ANIMATION ENGINE
-        const sr = ScrollReveal({ origin: 'bottom', distance: '60px', duration: 1000, delay: 200 });
-        sr.reveal('.reveal');
-        sr.reveal('.reveal-card', { interval: 150 });
-
-        // 2. MODAL & BUTTON ENGINE
-        const modal = document.getElementById('booking-modal');
-        const openTriggers = [
-            document.getElementById('navBookingTrigger'),
-            document.getElementById('heroBookingTrigger'),
-            ...document.querySelectorAll('.serviceTrigger')
-        ];
-
-        const openModal = () => {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-
-        const closeModal = () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        };
-
-        // Attach listeners to all buttons
-        openTriggers.forEach(btn => btn.addEventListener('click', openModal));
-        document.getElementById('closeModal').addEventListener('click', closeModal);
-        document.getElementById('logoLink').addEventListener('click', () => window.scrollTo(0, 0));
-
-        // 3. WHATSAPP ENGINE
-        document.getElementById('waForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('custName').value;
-            const service = document.getElementById('custService').value;
-            const msg = `Hello go.safi! This is ${name}. I want to book a pickup for ${service}.`;
-            window.open(`https://wa.me/254707799266?text=${encodeURIComponent(msg)}`, '_blank');
-            closeModal();
+        // 1. Force Animations to start
+        window.addEventListener('load', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach((el, i) => {
+                setTimeout(() => el.classList.add('visible'), i * 150);
+            });
         });
+
+        // 2. Modal Logic (Simpler for better stability)
+        function showModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+        function hideModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // 3. Form Handling
+        document.getElementById('orderForm').onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            const msg = `Hello go.safi! This is ${name}. I want to book ${service}. Please arrange pickup.`;
+            window.open(`https://wa.me/254707799266?text=${encodeURIComponent(msg)}`, '_blank');
+            hideModal();
+        };
     </script>
 </body>
 </html>
