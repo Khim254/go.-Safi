@@ -4,107 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>go.safi | Premium Cleaning</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    
     <style>
         :root { --brand-red: #e11d48; --brand-blue: #1e40af; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-brand-red { background-color: var(--brand-red); }
-        .bg-brand-blue { background-color: var(--brand-blue); }
-        .text-brand-red { color: var(--brand-red); }
-        .text-brand-blue { color: var(--brand-blue); }
-        
-        /* Modal Animation */
-        #booking-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
-        .modal-content { transition: transform 0.3s ease; transform: scale(0.9); }
-        .modal-open .modal-content { transform: scale(1); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background: #fdfdfd; }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+
+        /* LOGO ANIMATION */
+        .logo-box { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .logo-box:hover { transform: rotate(10deg) scale(1.1); background-color: var(--brand-red); }
+
+        /* BUTTON FIXES & ANIMATIONS */
+        .btn-main { transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-main:hover { filter: brightness(1.1); box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.4); }
+
+        /* MARQUEE */
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-marquee { display: flex; animation: marquee 20s linear infinite; width: max-content; }
+
+        /* MODAL LOGIC */
+        #booking-modal { 
+            display: none; /* Hidden by default */
+            position: fixed; 
+            inset: 0; 
+            z-index: 999; 
+            background: rgba(30, 64, 175, 0.9); 
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+        #booking-modal.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-slate-50">
+<body>
 
-    <div class="bg-brand-red text-white py-2 text-center text-[10px] font-bold uppercase tracking-widest">
-        Free Pickup & Delivery Within 24 - 36 Hours
+    <div class="bg-brand-blue text-white py-2 overflow-hidden border-b border-white/10">
+        <div class="animate-marquee font-black uppercase text-[10px] tracking-[0.3em]">
+            <span class="mx-10">⚡ Free Pickup & Delivery Within 24-36 Hours ⚡</span>
+            <span class="mx-10">💎 Carpet & Curtain Specialists 💎</span>
+            <span class="mx-10">🏢 Office & Residential Cleaning 🏢</span>
+            <span class="mx-10">⚡ Free Pickup & Delivery Within 24-36 Hours ⚡</span>
+        </div>
     </div>
 
-    <header class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
+    <header class="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-100 py-4 px-6">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="h-10 w-10 bg-brand-blue rounded-lg flex items-center justify-center text-white font-black italic">gs</div>
-                <span class="text-brand-blue font-black text-xl uppercase tracking-tighter">go.safi</span>
-            </div>
             
-            <div class="flex items-center gap-4">
-                <a href="tel:0707799266" class="hidden md:block text-brand-blue font-bold text-sm hover:text-brand-red">0707 799 266</a>
-                <button onclick="openModal()" class="bg-brand-red text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase shadow-lg hover:brightness-110 active:scale-95 transition-all">
-                    Book Now
-                </button>
+            <div class="flex items-center gap-4 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="logo-box h-14 w-14 rounded-2xl bg-brand-blue flex items-center justify-center shadow-xl">
+                    <span class="text-white font-black text-2xl italic tracking-tighter">gs</span>
+                </div>
+                <div>
+                    <h1 class="text-brand-blue font-black text-xl leading-none uppercase tracking-tighter">go.safi</h1>
+                    <p class="text-brand-red font-luxury text-[10px] italic font-bold">Laundry is luxury</p>
+                </div>
             </div>
+
+            <nav class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#services" class="hover:text-brand-blue">Services</a>
+                <a href="tel:0707799266" class="text-brand-red">0707 799 266</a>
+            </nav>
+
+            <button id="navBookBtn" class="btn-main bg-brand-red text-white px-8 py-3 rounded-full font-black text-[11px] uppercase tracking-widest shadow-lg">
+                Book Now
+            </button>
         </div>
     </header>
 
-    <section class="py-20 px-6 text-center">
-        <h1 class="text-brand-blue font-black text-6xl md:text-8xl mb-6 tracking-tighter leading-none">
-            Safi. Swift.<br><span class="text-brand-red">Superior.</span>
-        </h1>
-        <p class="text-slate-500 max-w-xl mx-auto text-lg mb-10">
-            Premium laundry and specialized cleaning. Delivered to your door in 24-36 hours.
-        </p>
-        <div class="flex justify-center gap-4">
-            <button onclick="openModal()" class="bg-brand-blue text-white px-8 py-4 rounded-2xl font-bold shadow-xl">Start Pickup</button>
-            <button onclick="window.location.href='https://wa.me/254707799266'" class="bg-white text-brand-blue border border-brand-blue px-8 py-4 rounded-2xl font-bold">WhatsApp Us</button>
+    <section class="py-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="reveal text-brand-blue font-black text-6xl md:text-9xl leading-[0.8] tracking-tighter uppercase mb-8">
+                Safi.<br/><span class="text-brand-red italic font-luxury lowercase">beyond</span><br/>Clean.
+            </h2>
+            <p class="reveal text-slate-500 text-lg md:text-2xl mb-12 font-medium">
+                Premier laundry and deep cleaning in Nairobi. <br/> Delivered in <span class="text-brand-red font-bold underline">36 hours</span>.
+            </p>
+            
+            <div class="reveal flex flex-wrap justify-center gap-6">
+                <button id="heroBookBtn" class="btn-main bg-brand-blue text-white px-12 py-6 rounded-2xl font-black text-lg shadow-2xl uppercase tracking-widest">
+                    Start Pickup
+                </button>
+                <a href="https://wa.me/254707799266" class="btn-main bg-white text-brand-blue border-2 border-brand-blue px-10 py-6 rounded-2xl font-black text-sm uppercase tracking-widest">
+                    WhatsApp
+                </a>
+            </div>
         </div>
     </section>
 
-    <div id="booking-modal" class="fixed inset-0 z-[100] invisible opacity-0 bg-brand-blue/90 backdrop-blur-sm flex items-center justify-center p-6">
-        <div class="modal-content bg-white w-full max-w-md rounded-[32px] p-8 relative shadow-2xl">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-brand-red">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    <div id="booking-modal">
+        <div class="bg-white w-full max-w-lg rounded-[40px] p-10 md:p-14 shadow-2xl relative mx-4">
+            <button id="closeModalBtn" class="absolute top-8 right-8 text-slate-300 hover:text-brand-red transition-colors">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <h2 class="text-2xl font-black text-brand-blue mb-2 uppercase italic">Request Pickup</h2>
-            <p class="text-slate-400 text-xs font-bold mb-6 uppercase tracking-widest">24-36hr Delivery Guarantee</p>
+            <h2 class="text-4xl font-black text-brand-blue mb-4 uppercase italic tracking-tighter">Details.</h2>
+            <p class="text-slate-400 mb-8 text-xs font-black uppercase tracking-widest leading-relaxed">Free Pickup • 36h Turnaround</p>
             
-            <form id="pickupForm" class="space-y-4">
-                <input type="text" id="name" placeholder="Full Name" class="w-full bg-slate-100 border-none rounded-xl p-4 outline-none focus:ring-2 focus:ring-brand-red" required>
-                <input type="tel" id="phone" placeholder="Phone Number" class="w-full bg-slate-100 border-none rounded-xl p-4 outline-none focus:ring-2 focus:ring-brand-red" required>
-                <select id="service" class="w-full bg-slate-100 border-none rounded-xl p-4 outline-none">
+            <form id="waForm" class="space-y-4">
+                <input type="text" id="custName" placeholder="Your Name" class="w-full bg-slate-100 border-none rounded-2xl p-5 text-sm focus:ring-2 focus:ring-brand-red outline-none" required>
+                <select id="custService" class="w-full bg-slate-100 border-none rounded-2xl p-5 text-sm focus:ring-2 focus:ring-brand-red outline-none font-bold text-slate-600">
                     <option>Standard Laundry</option>
-                    <option>Carpet Cleaning</option>
+                    <option>Carpet Deep Clean</option>
                     <option>Curtain Steaming</option>
-                </option>
-                <button type="submit" class="w-full bg-brand-red text-white py-4 rounded-xl font-bold uppercase tracking-widest shadow-lg">Confirm Booking</button>
+                    <option>Office Detail</option>
+                </select>
+                <button type="submit" class="w-full bg-brand-red text-white py-6 rounded-2xl font-black uppercase text-sm shadow-xl hover:brightness-110 transition-all tracking-widest">
+                    Send to WhatsApp
+                </button>
             </form>
         </div>
     </div>
 
     <script>
-        // Modal Logic
+        // 1. SELECT ELEMENTS
         const modal = document.getElementById('booking-modal');
+        const navBtn = document.getElementById('navBookBtn');
+        const heroBtn = document.getElementById('heroBookBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const form = document.getElementById('waForm');
+
+        // 2. BUTTON CLICK LOGIC (FUNCTIONAL)
+        const openModal = () => { 
+            modal.classList.add('active'); 
+            document.body.style.overflow = 'hidden'; 
+        };
         
-        function openModal() {
-            modal.classList.remove('invisible', 'opacity-0');
-            modal.classList.add('visible', 'opacity-100', 'modal-open');
-            document.body.style.overflow = 'hidden';
-        }
+        const closeModal = () => { 
+            modal.classList.remove('active'); 
+            document.body.style.overflow = 'auto'; 
+        };
 
-        function closeModal() {
-            modal.classList.add('invisible', 'opacity-0');
-            modal.classList.remove('visible', 'opacity-100', 'modal-open');
-            document.body.style.overflow = 'auto';
-        }
+        navBtn.onclick = openModal;
+        heroBtn.onclick = openModal;
+        closeBtn.onclick = closeModal;
 
-        // Form Logic
-        document.getElementById('pickupForm').addEventListener('submit', function(e) {
+        // 3. WHATSAPP FORM LOGIC
+        form.onsubmit = (e) => {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const service = document.getElementById('service').value;
-            alert(`Thank you, ${name}! Your request for ${service} has been received. We will contact you for pickup shortly.`);
+            const name = document.getElementById('custName').value;
+            const service = document.getElementById('custService').value;
+            const message = `Hello go.safi! My name is ${name}. I want to book a pickup for: ${service}.`;
+            const waUrl = `https://wa.me/254707799266?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
             closeModal();
-        });
+        };
 
-        // Close modal when clicking outside content
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
+        // 4. ANIMATIONS
+        ScrollReveal().reveal('.reveal', { 
+            origin: 'bottom', 
+            distance: '50px', 
+            duration: 1000, 
+            interval: 200 
         });
     </script>
 </body>
