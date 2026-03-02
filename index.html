@@ -3,234 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>go.safi | Premium Cleaning Ecosystem</title>
+    <title>go.safi | World-Class Cleaning Ecosystem</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
     
     <style>
-        /* ERROR PREVENTION: Force Theme & Background */
-        html, body { background-color: #020617 !important; color: #ffffff !important; margin: 0; padding: 0; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        
+        /* CRITICAL THEME FIXES */
+        html, body { background-color: #020617 !important; color: #ffffff; margin: 0; scroll-behavior: smooth; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         :root { --brand-red: #e11d48; --brand-blue: #1e40af; }
         .font-luxury { font-family: 'Playfair Display', serif; }
 
-        /* THE LOGO: 3D BADGE */
-        .logo-box {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .logo-box:hover { transform: scale(1.1) rotate(-5deg); background: #e11d48; }
-
-        /* INTERACTIVE SERVICE CARDS */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.5s ease;
-        }
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: #e11d48;
-            transform: translateY(-10px);
-        }
-
-        /* BUTTON LOGIC */
-        .btn-main { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .btn-main:hover { transform: translateY(-2px); filter: brightness(1.2); box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3); }
-        .btn-main:active { transform: scale(0.95); }
-
-        /* ANIMATION DELAYS */
+        /* PREVENT FLICKER */
         .reveal { opacity: 0; }
-        
-        /* SCROLLBAR GOTHAM STYLE */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #e11d48; border-radius: 10px; }
+
+        /* MESH GRADIENT (Optimized for Performance) */
+        @keyframes meshGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-animated {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: meshGradient 12s ease-infinite;
+        }
+
+        /* CURSOR LIGHT (Fixed Z-Index) */
+        #cursor-light {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.12) 0%, transparent 70%);
+            pointer-events: none; position: fixed; z-index: 0; transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease;
+        }
+
+        /* WORLD-CLASS GLASSMORPHISM */
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--brand-red);
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6);
+        }
+
+        /* CUSTOM BUTTONS */
+        .btn-premium {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
+        }
+        .btn-premium:hover { transform: scale(1.05); filter: brightness(1.1); box-shadow: 0 0 30px rgba(225, 29, 72, 0.4); }
+        .btn-premium:active { transform: scale(0.95); }
+
+        /* FLOATING ORBS */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+        .orb { animation: float 8s ease-in-out infinite; z-index: -1; pointer-events: none; }
+
+        /* MODAL FIX */
+        #booking-modal.hidden { display: none !important; }
+        #booking-modal.flex { display: flex !important; }
     </style>
 </head>
-<body class="selection:bg-rose-500 selection:text-white">
+<body class="bg-animated selection:bg-rose-500">
 
-    <div class="bg-[#e11d48] text-white py-2 text-center text-[10px] font-black uppercase tracking-[0.4em] sticky top-0 z-[200]">
-        ⚡ 24-36 Hour Professional Delivery Guaranteed ⚡
-    </div>
+    <div id="cursor-light"></div>
 
-    <header class="w-full z-[150] bg-[#020617]/90 backdrop-blur-lg border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+    <nav id="navbar" class="fixed top-0 w-full z-[100] px-6 py-8 transition-all duration-500">
+        <div class="max-w-7xl mx-auto glass rounded-[35px] px-8 py-5 flex justify-between items-center relative z-[110]">
             <div class="flex items-center gap-5 cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="logo-box h-14 w-14 rounded-2xl flex items-center justify-center font-black italic text-2xl text-white">gs</div>
-                <div class="hidden md:block leading-none">
+                <div class="h-14 w-14 bg-[#1e40af] rounded-2xl flex items-center justify-center font-black italic text-2xl text-white shadow-2xl border border-white/10">gs</div>
+                <div class="leading-none">
                     <h1 class="text-2xl font-black uppercase tracking-tighter">go.safi</h1>
-                    <p class="text-[#e11d48] font-luxury italic text-[10px] font-bold">Laundry is luxury</p>
+                    <p class="text-[#e11d48] font-luxury italic text-[10px] font-black">Laundry is luxury</p>
                 </div>
             </div>
-            <div class="flex items-center gap-8">
-                <nav class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    <a href="#services" class="hover:text-white">Services</a>
-                    <a href="#process" class="hover:text-white">Process</a>
-                    <a href="#contact" class="hover:text-white">Contact</a>
-                </nav>
-                <button onclick="toggleModal(true)" class="btn-main bg-[#e11d48] text-white px-8 py-3.5 rounded-full font-black text-[11px] uppercase tracking-widest shadow-xl shadow-rose-900/20">
+            <div class="flex items-center gap-10">
+                <div class="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
+                    <a href="#services" class="hover:text-white transition-colors">Portfolio</a>
+                    <a href="#contact" class="hover:text-white transition-colors">HQ</a>
+                </div>
+                <button onclick="toggleModal(true)" class="btn-premium bg-[#e11d48] text-white px-8 py-3.5 rounded-full font-black text-[11px] uppercase tracking-widest shadow-xl">
                     Book Pickup
                 </button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <section class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[150px] -z-10"></div>
-        
-        <div class="reveal max-w-5xl">
-            <h2 class="text-white font-black text-6xl md:text-[140px] leading-[0.8] tracking-[ -0.05em] uppercase mb-10">
-                Safi.<br/><span class="text-[#1e40af] italic font-luxury lowercase">beyond</span><br/><span class="text-[#e11d48]">Clean.</span>
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative pt-20">
+        <div class="orb absolute top-1/4 left-10 w-64 h-64 bg-blue-900/10 rounded-full blur-[100px]"></div>
+        <div class="orb absolute bottom-1/4 right-10 w-96 h-96 bg-rose-900/10 rounded-full blur-[120px]" style="animation-delay: -4s;"></div>
+
+        <div class="reveal max-w-6xl">
+            <span class="text-[#e11d48] font-black uppercase tracking-[0.8em] text-[10px] mb-8 block">Nairobi Elite Protocol</span>
+            <h2 class="text-white font-black text-7xl md:text-[140px] leading-[0.85] tracking-[-0.05em] uppercase mb-12">
+                Pure.<br/>
+                <span class="text-[#1e40af] italic font-luxury lowercase tracking-normal">beyond</span><br/>
+                Safi.
             </h2>
-            <p class="text-slate-400 text-lg md:text-2xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                Nairobi's elite cleaning ecosystem. We provide tech-driven laundry and deep cleaning solutions for high-value properties.
+            <p class="text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-16 font-medium leading-relaxed">
+                Nairobi's premier ecosystem for high-fidelity fabric care and specialized cleaning. Delivered to your door in <span class="text-white font-bold underline decoration-[#e11d48] underline-offset-8">36 hours</span>.
             </p>
             <div class="flex flex-wrap justify-center gap-6">
-                <button onclick="toggleModal(true)" class="btn-main bg-[#1e40af] text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl">Initialize Pickup</button>
-                <a href="https://wa.me/254707799266" class="btn-main border border-slate-700 px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-white hover:text-black">WhatsApp HQ</a>
+                <button onclick="toggleModal(true)" class="btn-premium bg-white text-black px-12 py-6 rounded-[25px] font-black text-sm uppercase tracking-widest hover:bg-[#1e40af] hover:text-white">Start Order</button>
+                <a href="https://wa.me/254707799266" class="btn-premium border border-white/20 px-12 py-6 rounded-[25px] font-black text-sm uppercase tracking-widest hover:bg-white/10">WhatsApp HQ</a>
             </div>
         </div>
     </section>
 
-    <div class="reveal max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-y border-white/5">
-        <div class="text-center">
-            <h5 class="text-3xl font-black text-white">36h</h5>
-            <p class="text-[10px] uppercase tracking-widest text-slate-500">Fast Delivery</p>
-        </div>
-        <div class="text-center border-l border-white/5">
-            <h5 class="text-3xl font-black text-[#e11d48]">100%</h5>
-            <p class="text-[10px] uppercase tracking-widest text-slate-500">Fabric Care</p>
-        </div>
-        <div class="text-center border-l border-white/5">
-            <h5 class="text-3xl font-black text-white">5-Star</h5>
-            <p class="text-[10px] uppercase tracking-widest text-slate-500">Nairobi Choice</p>
-        </div>
-        <div class="text-center border-l border-white/5">
-            <h5 class="text-3xl font-black text-[#1e40af]">Free</h5>
-            <p class="text-[10px] uppercase tracking-widest text-slate-500">Pickup</p>
-        </div>
-    </div>
+    <section id="services" class="max-w-7xl mx-auto px-8 py-32 relative z-10">
+        <div class="grid lg:grid-cols-3 gap-12">
+            <div class="reveal glass p-12 rounded-[55px] group">
+                <div class="h-16 w-16 bg-[#1e40af] rounded-2xl mb-10 flex items-center justify-center shadow-2xl group-hover:rotate-12 transition-transform">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M12 2v20M2 12h20"/></svg>
+                </div>
+                <h4 class="text-4xl font-black mb-4 uppercase italic">Laundry</h4>
+                <p class="text-slate-500 mb-10 text-sm leading-relaxed">Full-cycle Executive care. We treat every fiber with laboratory precision.</p>
+                <button onclick="toggleModal(true)" class="text-[#e11d48] font-black text-[10px] uppercase tracking-widest border-b-2 border-transparent hover:border-[#e11d48] transition-all">Select Protocol →</button>
+            </div>
 
-    <section id="services" class="max-w-7xl mx-auto px-8 py-32">
-        <div class="grid lg:grid-cols-3 gap-8">
-            <div class="reveal glass-card p-12 rounded-[50px] group">
-                <div class="h-14 w-14 bg-[#1e40af] rounded-2xl mb-10 flex items-center justify-center shadow-lg group-hover:bg-[#e11d48] transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M12 2v20M2 12h20"/></svg>
+            <div class="reveal glass p-12 rounded-[55px] border-[#e11d48]/40 bg-blue-900/5 scale-105">
+                <div class="h-16 w-16 bg-[#e11d48] rounded-2xl mb-10 flex items-center justify-center shadow-xl shadow-rose-900/40">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 20H4V4h16v16zM4 9h16"/></svg>
                 </div>
-                <h4 class="text-3xl font-black mb-4 uppercase italic">Executive Laundry</h4>
-                <p class="text-slate-500 mb-10 text-sm leading-relaxed">Full-cycle cleaning, drying, and folding. Specialized care for silks, suits, and delicates.</p>
-                <button onclick="toggleModal(true)" class="text-[#e11d48] font-black text-[10px] uppercase tracking-widest border-b-2 border-transparent hover:border-[#e11d48] pb-1 transition-all">Order Now →</button>
+                <h4 class="text-4xl font-black mb-4 uppercase italic text-[#e11d48]">Deep Clean</h4>
+                <p class="text-slate-400 mb-10 text-sm leading-relaxed">Industrial carpet and sofa extraction. Sanitizing your most intimate spaces.</p>
+                <button onclick="toggleModal(true)" class="bg-[#e11d48] text-white px-10 py-4 rounded-full font-black text-[11px] uppercase tracking-widest shadow-xl">Book Specialist</button>
             </div>
-            <div class="reveal glass-card p-12 rounded-[50px] border-[#1e40af] bg-blue-900/5 scale-105">
-                <div class="h-14 w-14 bg-[#e11d48] rounded-2xl mb-10 flex items-center justify-center shadow-lg">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 20H4V4h16v16zM4 9h16"/></svg>
+
+            <div class="reveal glass p-12 rounded-[55px] group">
+                <div class="h-16 w-16 bg-[#1e40af] rounded-2xl mb-10 flex items-center justify-center shadow-2xl group-hover:rotate-12 transition-transform">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M6 18h12M12 6v12"/></svg>
                 </div>
-                <h4 class="text-3xl font-black mb-4 uppercase italic text-[#e11d48]">Deep Clean</h4>
-                <p class="text-slate-400 mb-10 text-sm leading-relaxed">Carpet, Curtains, and Office blocks. Industrial steam extraction for 99.9% sanitation.</p>
-                <button onclick="toggleModal(true)" class="bg-[#e11d48] text-white px-8 py-3.5 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">Inquire Now</button>
-            </div>
-            <div class="reveal glass-card p-12 rounded-[50px] group">
-                <div class="h-14 w-14 bg-[#1e40af] rounded-2xl mb-10 flex items-center justify-center shadow-lg group-hover:bg-[#e11d48] transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M6 18h12M12 6v12"/></svg>
-                </div>
-                <h4 class="text-3xl font-black mb-4 uppercase italic">Steam Press</h4>
-                <p class="text-slate-500 mb-10 text-sm leading-relaxed">Industrial-grade precision ironing for that boardroom-ready finish. Delivered crisp.</p>
-                <button onclick="toggleModal(true)" class="text-[#e11d48] font-black text-[10px] uppercase tracking-widest border-b-2 border-transparent hover:border-[#e11d48] pb-1 transition-all">Order Now →</button>
+                <h4 class="text-4xl font-black mb-4 uppercase italic">Steam Press</h4>
+                <p class="text-slate-500 mb-10 text-sm leading-relaxed">Industrial-grade precision. Perfectly hung garments ready for the boardroom.</p>
+                <button onclick="toggleModal(true)" class="text-[#e11d48] font-black text-[10px] uppercase tracking-widest border-b-2 border-transparent hover:border-[#e11d48] transition-all">Select Protocol →</button>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="max-w-7xl mx-auto px-8 py-32 bg-white/[0.01] rounded-[60px] mb-20 border border-white/5">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
+    <section id="contact" class="max-w-7xl mx-auto px-8 py-32 mb-20">
+        <div class="glass rounded-[65px] p-12 md:p-24 grid lg:grid-cols-2 gap-20 items-center">
             <div class="reveal">
-                <h3 class="text-6xl font-black uppercase tracking-tighter mb-8 leading-none">Ready for<br/><span class="text-[#e11d48] italic font-luxury">Pickup?</span></h3>
-                <div class="flex items-center gap-6 mb-8 p-8 bg-blue-900/10 rounded-3xl inline-flex">
-                    <div class="h-12 w-12 bg-[#1e40af] rounded-xl flex items-center justify-center text-white"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                    <span class="text-3xl font-black tracking-tight">0707 799 266</span>
+                <h3 class="text-7xl font-black uppercase tracking-tighter mb-8 leading-none">Clean<br/><span class="text-[#e11d48] italic font-luxury">Concierge.</span></h3>
+                <div class="p-8 bg-blue-900/20 rounded-3xl inline-flex items-center gap-6 mb-10">
+                    <div class="h-14 w-14 bg-[#1e40af] rounded-2xl flex items-center justify-center text-white"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                    <span class="text-3xl font-black">0707 799 266</span>
                 </div>
-                <p class="text-slate-500 text-sm uppercase tracking-[0.3em] font-bold">Nairobi • Kilimani • Westlands • Karen</p>
             </div>
-            <div class="reveal">
-                <div class="bg-white p-12 rounded-[50px] shadow-2xl">
-                    <h4 class="text-3xl font-black uppercase italic text-[#020617] mb-8">Quick Request</h4>
-                    <form id="waForm" class="space-y-4">
-                        <input type="text" id="custName" placeholder="Full Name" class="w-full bg-slate-100 rounded-2xl p-6 text-sm text-[#020617] outline-none focus:ring-2 focus:ring-[#e11d48]" required>
-                        <select id="custService" class="w-full bg-slate-100 rounded-2xl p-6 text-sm text-[#020617] outline-none font-bold">
-                            <option>Standard Laundry</option>
-                            <option>Deep Carpet Clean</option>
-                            <option>Office Detail</option>
-                        </select>
-                        <button type="submit" class="w-full bg-[#e11d48] text-white py-6 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-rose-900/20">Send to WhatsApp</button>
-                    </form>
-                </div>
+            <div class="reveal bg-white p-12 rounded-[50px] shadow-2xl">
+                <form id="contactForm" class="space-y-5">
+                    <input type="text" id="name" placeholder="Full Name" class="w-full bg-slate-100 rounded-2xl p-6 text-black font-bold outline-none focus:ring-2 focus:ring-[#e11d48]" required>
+                    <select id="service" class="w-full bg-slate-100 rounded-2xl p-6 text-black font-bold outline-none">
+                        <option>Executive Laundry</option>
+                        <option>Deep Clean Specialist</option>
+                        <option>Commercial Contract</option>
+                    </select>
+                    <button type="submit" class="w-full bg-[#e11d48] text-white py-6 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-rose-900/30 hover:brightness-110 transition-all">Initialize Request</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 text-center">
-        <div class="logo-box h-12 w-12 rounded-xl mx-auto mb-6 flex items-center justify-center font-black italic text-white text-xl">gs</div>
-        <p class="text-slate-700 text-[9px] font-black uppercase tracking-[0.6em]">© 2024 go.safi • Beyond Clean • Built for the Elite</p>
+    <footer class="py-20 text-center opacity-40">
+        <div class="logo-badge h-10 w-10 bg-white/10 rounded-xl mx-auto mb-6 flex items-center justify-center font-black italic">gs</div>
+        <p class="text-[10px] font-black uppercase tracking-[1em]">go.safi • Nairobi Protocol • 2024</p>
     </footer>
 
-    <div id="booking-modal" class="fixed inset-0 z-[1000] hidden bg-[#020617]/95 backdrop-blur-2xl flex items-center justify-center p-6">
-        <div class="bg-white text-[#020617] w-full max-w-lg rounded-[50px] p-12 relative shadow-2xl">
-            <button onclick="toggleModal(false)" class="absolute top-10 right-10 text-slate-300 hover:text-[#e11d48]">✕</button>
-            <h2 class="text-5xl font-black mb-4 uppercase italic tracking-tighter">Secure.</h2>
-            <p class="text-slate-400 mb-10 text-[10px] font-black uppercase tracking-widest leading-relaxed">Free Pickup Within 24 Hours</p>
+    <div id="booking-modal" class="fixed inset-0 z-[1000] hidden bg-black/95 backdrop-blur-3xl items-center justify-center p-6">
+        <div class="bg-white text-black w-full max-w-lg rounded-[60px] p-16 relative shadow-2xl">
+            <button onclick="toggleModal(false)" class="absolute top-12 right-12 text-slate-300 hover:text-black transition-colors text-2xl font-bold">✕</button>
+            <h2 class="text-6xl font-black mb-4 uppercase italic tracking-tighter">Secure.</h2>
+            <p class="text-slate-400 mb-12 text-[10px] font-black uppercase tracking-widest">Free Pickup Guaranteed</p>
             <form id="modalForm" class="space-y-4">
-                <input type="text" id="mName" placeholder="Full Name" class="w-full bg-slate-100 rounded-2xl p-6 text-sm outline-none focus:ring-2 focus:ring-[#e11d48]" required>
-                <select id="mService" class="w-full bg-slate-100 rounded-2xl p-6 text-sm outline-none font-bold">
-                    <option>Standard Laundry Pickup</option>
-                    <option>Deep Cleaning Detail</option>
-                    <option>Office Block Quote</option>
-                </select>
-                <button type="submit" class="w-full bg-[#e11d48] text-white py-6 rounded-2xl font-black uppercase tracking-widest shadow-xl">Confirm Order</button>
+                <input type="text" id="mName" placeholder="Full Name" class="w-full bg-slate-100 rounded-2xl p-6 text-black font-bold outline-none focus:ring-2 focus:ring-[#e11d48]" required>
+                <button type="submit" class="w-full bg-black text-white py-6 rounded-2xl font-black uppercase tracking-widest shadow-2xl">Send Pickup Link</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Start Seamless Reveal Animations
+        // 1. MOUSE LIGHT ENGINE
+        const light = document.getElementById('cursor-light');
+        document.addEventListener('mousemove', (e) => {
+            light.style.left = e.clientX + 'px';
+            light.style.top = e.clientY + 'px';
+        });
+
+        // 2. WORLD-CLASS REVEAL ENGINE
         ScrollReveal().reveal('.reveal', { 
-            origin: 'bottom', 
-            distance: '60px', 
-            duration: 1000, 
-            delay: 100,
-            interval: 150,
+            origin: 'bottom', distance: '80px', duration: 1200, delay: 200, interval: 150,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
             afterReveal: (el) => el.style.opacity = "1"
         });
 
-        // Error-Proof Modal Logic
-        const modal = document.getElementById('booking-modal');
+        // 3. NAV SCROLL EFFECT
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-4');
+                nav.querySelector('div').classList.add('bg-black/60');
+            } else {
+                nav.classList.remove('py-4');
+                nav.querySelector('div').classList.remove('bg-black/60');
+            }
+        });
+
+        // 4. MODAL LOGIC
         function toggleModal(show) {
-            if(show) {
-                modal.classList.remove('hidden');
+            const m = document.getElementById('booking-modal');
+            if (show) {
+                m.classList.remove('hidden');
+                m.classList.add('flex');
                 document.body.style.overflow = 'hidden';
             } else {
-                modal.classList.add('hidden');
+                m.classList.add('hidden');
+                m.classList.remove('flex');
                 document.body.style.overflow = 'auto';
             }
         }
 
-        // Error-Proof WhatsApp Bridge
-        const handleOrder = (name, service) => {
-            const msg = `Order: Hello go.safi! This is ${name}. I want to book a pickup for ${service}.`;
+        const sendWA = (name, service) => {
+            const msg = `GS Protocol: Hello! This is ${name}. Launching request for ${service}.`;
             window.open(`https://wa.me/254707799266?text=${encodeURIComponent(msg)}`, '_blank');
             toggleModal(false);
         };
 
-        document.getElementById('waForm').onsubmit = (e) => {
+        document.getElementById('contactForm').onsubmit = (e) => {
             e.preventDefault();
-            handleOrder(document.getElementById('custName').value, document.getElementById('custService').value);
+            sendWA(document.getElementById('name').value, document.getElementById('service').value);
         };
 
         document.getElementById('modalForm').onsubmit = (e) => {
             e.preventDefault();
-            handleOrder(document.getElementById('mName').value, document.getElementById('mService').value);
+            sendWA(document.getElementById('mName').value, "Standard Protocol Pickup");
         };
     </script>
 </body>
